@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identifícate · TRAFALGAR</title>
+  <meta name="description" content="Comienza el registro de tu cuenta TRAFALGAR. Paso 1 de 4." />
+  <link rel="icon" type="image/svg+xml" href="../assets/logo/leon-isotipo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,wght@1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --naranja: #f37036;
+      --ink:     #14130f;
+      --ink-2:   #5a574f;
+      --ink-3:   #9a958a;
+      --ink-4:   #c6c2b7;
+      --line:    #e6e1d6;
+      --line-2:  #efeae0;
+      --bg:      #faf8f3;
+      --soft:    #f1ede2;
+      --err:     #c24a2a;
+      --ok:      #2f7d3a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px; line-height: 1.55; color: var(--ink); background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a, button, input { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--naranja); outline-offset: 4px; border-radius: 2px; }
+
+    .topnav { display: flex; align-items: center; justify-content: space-between; padding: 26px 56px; max-width: 1320px; margin: 0 auto; gap: 32px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .brand img { width: 30px; height: 30px; object-fit: contain; }
+    .brand-name { font-size: 16px; font-weight: 700; letter-spacing: 4px; }
+    .step-tabs { display: flex; gap: 6px; list-style: none; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 16px; font-weight: 500; color: var(--ink-2); background: transparent; border: 1px solid var(--line); border-radius: 999px; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    .chip-n { font-size: 16px; color: var(--ink-3); font-feature-settings: 'tnum'; }
+    .chip.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .chip.is-active .chip-n { color: rgba(255,255,255,0.6); }
+    .help { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; color: var(--ink-2); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 18px; text-decoration: none; transition: background 0.15s; }
+    .help:hover { background: var(--soft); color: var(--ink); }
+    .help svg { width: 14px; height: 14px; color: var(--naranja); }
+
+    .wrap { max-width: 920px; margin: 0 auto; padding: 64px 56px 96px; }
+    .hero { text-align: center; margin-bottom: 96px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--naranja); font-weight: 500; margin-bottom: 28px; }
+    .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 24px; height: 1px; background: var(--naranja); opacity: 0.5; }
+    .hero-h { font-size: clamp(40px, 5.6vw, 64px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.04; margin-bottom: 22px; }
+    .hero-h .italic { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 400; }
+    .hero-lead { font-size: 18px; color: var(--ink-2); max-width: 580px; margin: 0 auto; line-height: 1.6; }
+
+    .form { display: flex; flex-direction: column; }
+
+    /* Section + progressive reveal */
+    .fld { display: grid; grid-template-columns: 88px 1fr; gap: 40px; align-items: start; padding: 56px 0; border-top: 1px solid var(--line); }
+    .fld:first-of-type { border-top: none; padding-top: 0; }
+    .fld[hidden] { display: none !important; }
+    .fld.is-revealing { animation: revealFld 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    @keyframes revealFld {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .fld-aside { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+    .fld-n { font-size: 16px; font-weight: 600; letter-spacing: 2px; color: var(--ink-3); font-feature-settings: 'tnum'; }
+    .fld-ico-wrap { width: 64px; height: 64px; background: var(--soft); border-radius: 50%; display: grid; place-items: center; }
+    .fld-ico { width: 30px; height: 30px; color: var(--ink); }
+    .fld-body { max-width: 600px; }
+    .fld-t { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.2; }
+    .fld-d { font-size: 16px; color: var(--ink-2); margin-bottom: 28px; max-width: 540px; }
+
+    .input {
+      width: 100%; max-width: 480px; padding: 16px 0;
+      background: transparent; border: none; border-bottom: 1.5px solid var(--ink-4);
+      font-family: inherit; font-size: 18px; color: var(--ink);
+      letter-spacing: -0.005em; transition: border-color 0.15s;
+    }
+    .input::placeholder { color: var(--ink-3); font-weight: 300; letter-spacing: 0.5px; }
+    .input:focus { outline: none; border-bottom-color: var(--ink); }
+    .input[aria-invalid="true"] { border-bottom-color: var(--err); }
+    .input-rfc { font-family: 'Inter', monospace; font-feature-settings: 'tnum'; letter-spacing: 3px; text-transform: uppercase; font-size: 20px; }
+    .input-help { font-size: 16px; color: var(--ink-3); margin-top: 10px; max-width: 480px; line-height: 1.5; }
+    .input-error { font-size: 16px; color: var(--err); margin-top: 10px; display: none; }
+    .input-error.is-visible { display: block; }
+
+    .uploads { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 540px; }
+    .upload { position: relative; border: 1.5px dashed var(--ink-4); border-radius: 10px; padding: 22px 20px; cursor: pointer; transition: border-color 0.15s, background 0.15s; display: flex; flex-direction: column; gap: 10px; min-height: 124px; }
+    .upload:hover { border-color: var(--ink); background: var(--soft); }
+    .upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-ico { width: 28px; height: 28px; color: var(--ink-3); transition: color 0.15s; }
+    .upload:hover .upload-ico { color: var(--ink); }
+    .upload-title { font-size: 16px; font-weight: 600; color: var(--ink); font-feature-settings: 'tnum'; }
+    .upload-hint { font-size: 16px; color: var(--ink-3); line-height: 1.4; }
+    .upload-filename { font-size: 16px; color: var(--ink); font-weight: 500; word-break: break-all; display: none; margin-top: 4px; }
+    .upload.is-loaded { border-color: var(--ok); border-style: solid; background: rgba(47, 125, 58, 0.04); }
+    .upload.is-loaded .upload-ico { color: var(--ok); }
+    .upload.is-loaded .upload-hint { display: none; }
+    .upload.is-loaded .upload-filename { display: block; }
+
+    .firma-pwd { margin-top: 22px; max-width: 480px; }
+    .firma-pwd label { display: block; font-size: 16px; font-weight: 500; color: var(--ink-2); margin-bottom: 6px; letter-spacing: 0.5px; }
+
+    .firma-note { display: inline-flex; align-items: flex-start; gap: 10px; margin-top: 22px; padding: 14px 16px; background: var(--soft); border-radius: 8px; font-size: 16px; color: var(--ink-2); line-height: 1.5; max-width: 540px; }
+    .firma-note svg { width: 16px; height: 16px; color: var(--naranja); flex-shrink: 0; margin-top: 2px; }
+    .firma-note strong { color: var(--ink); font-weight: 600; }
+
+    .checks { display: flex; flex-direction: column; gap: 16px; }
+    .check { display: grid; grid-template-columns: 22px 1fr; gap: 16px; align-items: start; cursor: pointer; }
+    .check input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 1.5px solid var(--ink-4); border-radius: 4px; background: transparent; cursor: pointer; margin: 2px 0 0; position: relative; transition: all 0.15s; }
+    .check:hover input[type="checkbox"] { border-color: var(--ink); }
+    .check input[type="checkbox"]:checked { background: var(--ink); border-color: var(--ink); }
+    .check input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 2px; left: 6px; width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+    .check-body { font-size: 16px; line-height: 1.55; }
+    .check-body a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    .check-body a:hover { color: var(--naranja); }
+    .why { display: inline-block; margin-top: 6px; font-size: 16px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    .why:hover { color: var(--naranja); }
+
+    .cta-row {
+      position: sticky;
+      bottom: 28px;
+      z-index: 10;
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .cta {
+      pointer-events: auto;
+      padding: 18px 36px;
+      background: var(--ink-4);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: not-allowed;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow:
+        0 14px 36px -10px rgba(20, 20, 20, 0.18),
+        0 2px 6px rgba(20, 20, 20, 0.05);
+    }
+    .cta:not(:disabled) {
+      background: var(--ink);
+      cursor: pointer;
+      box-shadow:
+        0 18px 44px -10px rgba(20, 20, 20, 0.42),
+        0 2px 6px rgba(20, 20, 20, 0.08);
+    }
+    .cta:not(:disabled):hover {
+      background: #000;
+      box-shadow:
+        0 22px 52px -10px rgba(20, 20, 20, 0.5),
+        0 2px 8px rgba(20, 20, 20, 0.12);
+    }
+    .cta:not(:disabled):active { transform: translateY(1px); }
+    .cta-arrow { width: 18px; height: 18px; transition: transform 0.25s; }
+    .cta:not(:disabled):hover .cta-arrow { transform: translateX(5px); }
+
+    /* Pending counter — subtle hint of what's left */
+    .progress-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding: 8px 16px;
+      background: var(--soft);
+      border-radius: 999px;
+      font-size: 16px;
+      color: var(--ink-2);
+      letter-spacing: 0.3px;
+      transition: opacity 0.3s ease;
+    }
+    .progress-hint-dots {
+      display: inline-flex;
+      gap: 5px;
+    }
+    .progress-hint-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink-4);
+      transition: background 0.3s ease;
+    }
+    .progress-hint-dot.is-done { background: var(--ok); }
+    .progress-hint[hidden] { display: none; }
+
+    @media (max-width: 880px) {
+      .topnav { padding: 18px 24px; flex-wrap: wrap; gap: 16px; }
+      .step-tabs { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; }
+      .step-tabs::-webkit-scrollbar { display: none; }
+      .chip { white-space: nowrap; padding: 8px 14px; }
+      .wrap { padding: 32px 24px 64px; }
+      .hero { margin-bottom: 56px; }
+      .fld { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+      .fld-aside { flex-direction: row; align-items: center; gap: 16px; }
+      .fld-ico-wrap { width: 52px; height: 52px; }
+      .fld-ico { width: 24px; height: 24px; }
+      .fld-t { font-size: 24px; }
+      .uploads { grid-template-columns: 1fr; }
+      .cta-row { margin-top: 40px; bottom: 20px; }
+      .cta { padding: 16px 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topnav" role="banner">
+    <a href="#" class="brand" aria-label="TRAFALGAR — Inicio">
+      <img src="../assets/logo/leon-isotipo.svg" alt="" aria-hidden="true" />
+      <span class="brand-name">TRAFALGAR</span>
+    </a>
+
+    <ol class="step-tabs" aria-label="Pasos del registro">
+      <li><span class="chip is-active" aria-current="step"><span class="chip-n">01</span> Registro</span></li>
+      <li><span class="chip"><span class="chip-n">02</span> Compañía</span></li>
+      <li><span class="chip"><span class="chip-n">03</span> Documentos</span></li>
+      <li><span class="chip"><span class="chip-n">04</span> Firma</span></li>
+    </ol>
+
+    <a href="#" class="help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      ¿Necesitas ayuda?
+    </a>
+  </header>
+
+  <main class="wrap">
+    <header class="hero">
+      <p class="hero-eyebrow">Paso 1 de 4 · Registro</p>
+      <h1 class="hero-h">Identifícate. <span class="italic">Conectaremos el resto.</span></h1>
+      <p class="hero-lead">Te pedimos cuatro datos, uno a la vez. Con tu e.firma traeremos tu información fiscal directamente del SAT en el siguiente paso — sin formularios largos.</p>
+
+      <div class="progress-hint" id="progress-hint" role="status" aria-live="polite">
+        <span class="progress-hint-dots" aria-hidden="true">
+          <span class="progress-hint-dot" data-n="0"></span>
+          <span class="progress-hint-dot" data-n="1"></span>
+          <span class="progress-hint-dot" data-n="2"></span>
+          <span class="progress-hint-dot" data-n="3"></span>
+        </span>
+        <span id="progress-hint-text">Comencemos por tu correo</span>
+      </div>
+    </header>
+
+    <form class="form" id="onboarding-form" novalidate>
+      <!-- 01 EMAIL -->
+      <section class="fld" id="fld-email">
+        <div class="fld-aside">
+          <span class="fld-n">01</span>
+          <span class="fld-ico-wrap" aria-hidden="true">
+            <svg class="fld-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="26" height="18" rx="1.5"/>
+              <path d="M3 9l13 10L29 9"/>
+            </svg>
+          </span>
+        </div>
+        <div class="fld-body">
+          <h2 class="fld-t">Correo de tu empresa</h2>
+          <p class="fld-d" id="email-hint">Usaremos el correo de la persona que gestionará la cuenta TRAFALGAR. Si abres a título individual, ingresa tu correo personal.</p>
+          <input
+            class="input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="contacto@empresa.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-describedby="email-hint email-error"
+          />
+          <p class="input-error" id="email-error" role="alert">Ingresa un correo válido.</p>
+        </div>
+      </section>
+
+      <!-- 02 RFC (oculto hasta email válido) -->
+      <section class="fld" id="fld-rfc" hidden>
+        <div class="fld-aside">
+          <span class="fld-n">02</span>
+          <span class="fld-ico-wrap" aria-hidden="true">
+            <svg class="fld-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="6" width="26" height="20" rx="2"/>
+              <line x1="3" y1="12" x2="29" y2="12"/>
+              <line x1="8" y1="18" x2="14" y2="18"/>
+              <line x1="8" y1="22" x2="20" y2="22"/>
+              <circle cx="23" cy="19" r="3"/>
+            </svg>
+          </span>
+        </div>
+        <div class="fld-body">
+          <h2 class="fld-t">Tu RFC</h2>
+          <p class="fld-d">Registro Federal de Contribuyentes. 12 caracteres si eres Persona Moral; 13 si eres Persona Física.</p>
+          <input
+            class="input input-rfc"
+            type="text"
+            id="rfc"
+            name="rfc"
+            placeholder="XAXX010101000"
+            autocomplete="off"
+            spellcheck="false"
+            maxlength="13"
+            pattern="[A-ZÑ&amp;]{3,4}[0-9]{6}[A-Z0-9]{3}"
+            required
+            aria-required="true"
+            aria-describedby="rfc-help rfc-error"
+          />
+          <p class="input-help" id="rfc-help">Ej. <code>XAXX010101000</code> (Moral) o <code>XAXX010101A12</code> (Física).</p>
+          <p class="input-error" id="rfc-error" role="alert">RFC inválido. Verifica el formato.</p>
+        </div>
+      </section>
+
+      <!-- 03 e.firma (oculto hasta RFC válido) -->
+      <section class="fld" id="fld-firma" hidden>
+        <div class="fld-aside">
+          <span class="fld-n">03</span>
+          <span class="fld-ico-wrap" aria-hidden="true">
+            <svg class="fld-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 14V9a5 5 0 00-10 0v5"/>
+              <rect x="6" y="14" width="20" height="14" rx="2"/>
+              <circle cx="16" cy="20" r="1.5" fill="currentColor"/>
+              <line x1="16" y1="21.5" x2="16" y2="24"/>
+            </svg>
+          </span>
+        </div>
+        <div class="fld-body">
+          <h2 class="fld-t">Llave del SAT (e.firma)</h2>
+          <p class="fld-d">Sube los archivos <code>.cer</code> y <code>.key</code> de tu e.firma e ingresa la contraseña. La usaremos sólo para autenticar la consulta al SAT en el Paso 2.</p>
+
+          <div class="uploads">
+            <label class="upload" id="upload-cer">
+              <svg class="upload-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <path d="M14 2v6h6"/>
+                <path d="M9 13l2 2 4-4"/>
+              </svg>
+              <span class="upload-title">Archivo .cer</span>
+              <span class="upload-hint">Certificado público<br>Arrastra o haz clic</span>
+              <span class="upload-filename" id="cer-filename"></span>
+              <input type="file" id="cer" name="cer" accept=".cer" required aria-required="true" />
+            </label>
+
+            <label class="upload" id="upload-key">
+              <svg class="upload-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="7" cy="14" r="4"/>
+                <path d="M10.5 11.5l9-9M16 6l2 2M14 8l4 4"/>
+              </svg>
+              <span class="upload-title">Archivo .key</span>
+              <span class="upload-hint">Llave privada<br>Arrastra o haz clic</span>
+              <span class="upload-filename" id="key-filename"></span>
+              <input type="file" id="key" name="key" accept=".key" required aria-required="true" />
+            </label>
+          </div>
+
+          <div class="firma-pwd">
+            <label for="firma-pwd">Contraseña de tu e.firma</label>
+            <input
+              class="input"
+              type="password"
+              id="firma-pwd"
+              name="firma-password"
+              autocomplete="off"
+              placeholder="••••••••"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <p class="firma-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            <span><strong>Cifrado de extremo a extremo.</strong> Tu e.firma se procesa en sesión y nunca se almacena en nuestros servidores. Solo la usamos para autenticar la consulta al SAT.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- 04 Legal (oculto hasta e.firma completa) -->
+      <section class="fld" id="fld-legal" hidden>
+        <div class="fld-aside">
+          <span class="fld-n">04</span>
+          <span class="fld-ico-wrap" aria-hidden="true">
+            <svg class="fld-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 3L5 7v9c0 7.5 11 13 11 13s11-5.5 11-13V7l-11-4z"/>
+              <path d="M11 16l4 4 7-8"/>
+            </svg>
+          </span>
+        </div>
+        <div class="fld-body">
+          <h2 class="fld-t">Términos y permisos</h2>
+          <p class="fld-d">Último paso. Antes de continuar, necesitamos tu consentimiento para dos cosas:</p>
+          <div class="checks">
+            <label class="check">
+              <input type="checkbox" name="terms" required aria-required="true" />
+              <span class="check-body">
+                He leído y acepto el <a href="#" target="_blank" rel="noopener">Aviso de Privacidad</a> y los <a href="#" target="_blank" rel="noopener">Términos y Condiciones</a> de TRAFALGAR.
+              </span>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="geo" required aria-required="true" />
+              <span class="check-body">
+                Acepto activar la geolocalización de mi dispositivo durante el proceso de apertura.
+                <a class="why" href="#" target="_blank" rel="noopener">¿Por qué es necesario?</a>
+              </span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta-row">
+        <button class="cta" type="submit" disabled aria-disabled="true">
+          Continuar al Paso 2
+          <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    (() => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const form     = document.getElementById('onboarding-form');
+      const cta      = form.querySelector('.cta');
+      const emailEl  = document.getElementById('email');
+      const emailErr = document.getElementById('email-error');
+      const rfcEl    = document.getElementById('rfc');
+      const rfcErr   = document.getElementById('rfc-error');
+      const cerEl    = document.getElementById('cer');
+      const keyEl    = document.getElementById('key');
+      const pwdEl    = document.getElementById('firma-pwd');
+      const cerBox   = document.getElementById('upload-cer');
+      const keyBox   = document.getElementById('upload-key');
+      const cerFn    = document.getElementById('cer-filename');
+      const keyFn    = document.getElementById('key-filename');
+      const hintEl   = document.getElementById('progress-hint');
+      const hintTxt  = document.getElementById('progress-hint-text');
+      const hintDots = document.querySelectorAll('.progress-hint-dot');
+
+      const RFC_RE = /^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$/;
+
+      const isEmailValid = () => emailEl.value && emailEl.checkValidity();
+      const isRfcValid   = () => RFC_RE.test(rfcEl.value.toUpperCase());
+      const isFirmaValid = () => (cerEl.files?.length > 0) && (keyEl.files?.length > 0) && pwdEl.value.length >= 4;
+
+      const HINTS = [
+        'Comencemos por tu correo',
+        'Ahora tu RFC',
+        'Sube tu e.firma',
+        'Acepta los términos y continúa',
+        '¡Listo! Continúa al Paso 2'
+      ];
+
+      // Progressive reveal — idempotent per section
+      const revealed = new Set(['fld-email']);
+      const reveal = (id) => {
+        if (revealed.has(id)) return;
+        revealed.add(id);
+        const sec = document.getElementById(id);
+        sec.hidden = false;
+        if (!prefersReduced) {
+          sec.classList.add('is-revealing');
+          sec.addEventListener('animationend', () => sec.classList.remove('is-revealing'), { once: true });
+          setTimeout(() => {
+            sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 280);
+        }
+      };
+
+      // Email
+      emailEl.addEventListener('blur', () => {
+        if (emailEl.value && !emailEl.checkValidity()) {
+          emailErr.classList.add('is-visible');
+          emailEl.setAttribute('aria-invalid', 'true');
+        }
+      });
+      emailEl.addEventListener('input', () => {
+        if (emailEl.checkValidity() || !emailEl.value) {
+          emailErr.classList.remove('is-visible');
+          emailEl.removeAttribute('aria-invalid');
+        }
+        refresh();
+      });
+
+      // RFC — uppercase normalize + validation
+      rfcEl.addEventListener('input', () => {
+        const upper = rfcEl.value.toUpperCase();
+        if (rfcEl.value !== upper) {
+          const pos = rfcEl.selectionStart;
+          rfcEl.value = upper;
+          rfcEl.setSelectionRange(pos, pos);
+        }
+        if (isRfcValid() || !rfcEl.value) {
+          rfcErr.classList.remove('is-visible');
+          rfcEl.removeAttribute('aria-invalid');
+        }
+        refresh();
+      });
+      rfcEl.addEventListener('blur', () => {
+        if (rfcEl.value && !isRfcValid()) {
+          rfcErr.classList.add('is-visible');
+          rfcEl.setAttribute('aria-invalid', 'true');
+        }
+      });
+
+      // File pickers
+      const wireUpload = (input, box, fn) => {
+        input.addEventListener('change', () => {
+          if (input.files && input.files[0]) {
+            fn.textContent = input.files[0].name;
+            box.classList.add('is-loaded');
+          } else {
+            fn.textContent = '';
+            box.classList.remove('is-loaded');
+          }
+          refresh();
+        });
+      };
+      wireUpload(cerEl, cerBox, cerFn);
+      wireUpload(keyEl, keyBox, keyFn);
+
+      const refresh = () => {
+        const emailOk = isEmailValid();
+        const rfcOk   = isRfcValid();
+        const firmaOk = isFirmaValid();
+        const terms   = form.querySelector('input[name="terms"]').checked;
+        const geo     = form.querySelector('input[name="geo"]').checked;
+
+        // Progressive reveal — forward-only
+        if (emailOk) reveal('fld-rfc');
+        if (rfcOk)   reveal('fld-firma');
+        if (firmaOk) reveal('fld-legal');
+
+        // Progress hint
+        let stage = 0;
+        if (emailOk) stage = 1;
+        if (rfcOk)   stage = 2;
+        if (firmaOk) stage = 3;
+        if (terms && geo) stage = 4;
+        hintTxt.textContent = HINTS[stage];
+        hintDots.forEach((dot, idx) => {
+          dot.classList.toggle('is-done', idx < stage);
+        });
+        if (stage === 4) hintEl.hidden = true; else hintEl.hidden = false;
+
+        // CTA
+        const allValid = emailOk && rfcOk && firmaOk && terms && geo;
+        cta.disabled = !allValid;
+        cta.setAttribute('aria-disabled', String(!allValid));
+      };
+
+      form.addEventListener('change', refresh);
+      form.addEventListener('input', refresh);
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (cta.disabled) return;
+        const rfc = rfcEl.value.toUpperCase();
+        window.location.href = `compania.html?rfc=${encodeURIComponent(rfc)}`;
+      });
+
+      refresh();
+    })();
+  </script>
+</body>
+</html>
