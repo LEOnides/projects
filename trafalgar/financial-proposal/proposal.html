@@ -248,11 +248,11 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
 /* RESPONSIVE adjustments */
 @media(max-width:900px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}}
 
-  .internal-only { display: none !important; }
-  .client-only   { display: block !important; }
-  .info-card-val.client-only { display: block !important; }
-  .stat-val.accent.client-only { display: block !important; }
-  .num.client-only { display: table-cell !important; }
+  /* === VERSIÓN CLIENTE: toggle y contenido interno ocultos === */
+  .vista-toggle { display:none !important; }
+  .internal-only { display:none !important; }
+  .client-only { display:block !important; }
+
 </style>
 </head>
 <body>
@@ -268,7 +268,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
     <div class="nav-doc">Diseño de Experiencia Digital · 2026</div>
   </div>
   <div class="nav-right">
-    <div class="vista-toggle" style="display:none!important" onclick="toggleVista()">
+    <div class="vista-toggle" onclick="toggleVista()">
       <span class="vista-label client-only" style="color:var(--subtle)">Vista Cliente</span>
       <span class="vista-label internal-only" style="color:var(--accent)">Vista Interna</span>
       <div class="toggle-track" id="vistaTrack">
@@ -286,7 +286,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
   <button class="tab" onclick="goTo(3)">TRF Casa de Bolsa</button>
   <button class="tab" onclick="goTo(4)">Asset Management</button>
   <button class="tab" onclick="goTo(5)">Estrategia Digital</button>
-  <button class="tab" onclick="goTo(5)">Roadmap de ejecución</button>
+  <button class="tab" onclick="goTo(6)">Roadmap de ejecución</button>
   <div class="tab-indicator" id="indicator"></div>
 </div>
 
@@ -315,7 +315,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
       <div class="stat-lbl">Pantallas en 3 dispositivos</div>
     </div>
     <div class="stat">
-      <div class="stat-val">4.5 m</div>
+      <div class="stat-val">3 m</div>
       <div class="stat-lbl">Duración total (paralelo)</div>
     </div>
     <div class="stat">
@@ -360,7 +360,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <td><strong>TRF Casa de Bolsa</strong><br><span style="font-size:var(--fs-note);color:var(--subtle)">Portal público CNBV/AMIB</span></td>
           <td>15</td>
           <td>45</td>
-          <td>7 semanas</td>
+          <td>5 semanas</td>
           <td class="num client-only">$375,000 MXN</td>
           <td class="num internal-only">$300,000 – $375,000 MXN</td>
         </tr>
@@ -368,7 +368,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <td><strong>Asset Management</strong><br><span style="font-size:var(--fs-note);color:var(--subtle)">Landing page de inversiones</span></td>
           <td>8</td>
           <td>24</td>
-          <td>7 semanas</td>
+          <td>5 semanas</td>
           <td class="num client-only">$225,000 MXN</td>
           <td class="num internal-only">$180,000 – $225,000 MXN</td>
         </tr>
@@ -376,7 +376,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <td><strong>Design System</strong><br><span style="font-size:var(--fs-note);color:var(--subtle)">Tokens, componentes, prototipo funcional</span></td>
           <td>—</td>
           <td>—</td>
-          <td>Progresivo (4.5 m)</td>
+          <td>Progresivo (3 m)</td>
           <td class="num client-only">$240,000 MXN</td>
           <td class="num internal-only">$200,000 – $240,000 MXN</td>
         </tr>
@@ -438,7 +438,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <td>TOTAL</td>
           <td>49</td>
           <td>147</td>
-          <td>4.5 meses</td>
+          <td>3 meses</td>
           <td class="num client-only">$1,560,000 MXN + IVA</td>
           <td class="num internal-only">$1,265,000 – $1,560,000 MXN + IVA</td>
         </tr>
@@ -1192,26 +1192,25 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
 
 <div class="panel" id="p5">
 
-  <div class="section-title">Roadmap — Ejecución en Paralelo (4.5 Meses)</div>
-  <p style="font-size:var(--fs-sm);color:var(--muted);margin-bottom:24px">Los proyectos arrancan de forma escalonada con <strong>2 semanas de diferencia</strong> entre cada uno: Sofipo (S1) → Casa de Bolsa (S3) → Asset Management (S5) → Trafalgar Pay LP (S7). El Design System se construye progresivamente durante los 4.5 meses.</p>
+  <div class="section-title">Roadmap — Ejecución en Paralelo (3 Meses)</div>
+  <p style="font-size:var(--fs-sm);color:var(--muted);margin-bottom:24px">Los proyectos arrancan de forma escalonada con <strong>7 días de diferencia</strong> entre cada uno: Sofipo (S0) → Pay LP (S1) → Casa de Bolsa (S2) → Asset Management (S3). Todos los proyectos concluyen en <strong>3 meses</strong>. El Design System se construye progresivamente durante el mismo periodo.</p>
 
   <!-- GANTT por semanas -->
   <div class="c" style="overflow-x:auto">
-    <div class="c-head">Vista por Semanas (18 semanas ≈ 4.5 meses)</div>
+    <div class="c-head">Vista por Semanas (12 semanas · 3 meses)</div>
 
     <div style="min-width:860px">
       <!-- Header semanas -->
       <div style="display:flex;margin-left:196px;border-bottom:1px solid var(--border2);margin-bottom:0">
         <div style="flex:1;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em;border-right:1px solid var(--border)">MES 1</div>
         <div style="flex:1;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em;border-right:1px solid var(--border)">MES 2</div>
-        <div style="flex:1;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em;border-right:1px solid var(--border)">MES 3</div>
-        <div style="flex:1;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em;border-right:1px solid var(--border)">MES 4</div>
-        <div style="flex:0.5;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em">MES 5</div>
+        <div style="flex:1;text-align:center;font-size:var(--fs-label);font-weight:600;color:var(--subtle);padding:6px 0;letter-spacing:.08em">MES 3</div>
       </div>
 
       <!-- Sub-header semanas -->
       <div style="display:flex;margin-left:196px;border-bottom:1.5px solid var(--border2)">
-        <!-- 20 weeks -->
+        <!-- 12 weeks S0-S11 -->
+        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S0</div>
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S1</div>
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S2</div>
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S3</div>
@@ -1222,15 +1221,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S8</div>
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S9</div>
         <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S10</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S11</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S12</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S13</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S14</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S15</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S16</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0;border-right:1px solid var(--border)">S17</div>
-        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0">S18</div>
-        
+        <div style="flex:1;text-align:center;font-size:12px;color:var(--hint);padding:3px 0">S11</div>
       </div>
 
       <!-- ROWS -->
@@ -1245,7 +1236,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
             </div>
           </div>
           <div style="flex:1;display:flex;align-items:center;height:52px;position:relative">
-            <div style="position:absolute;left:0%;width:28%;height:28px;background:var(--blue);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S1–S5 · Arranque</div>
+            <div style="position:absolute;left:0%;width:42%;height:28px;background:var(--blue);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S0–S4 · Arranque</div>
           </div>
         </div>
         <div class="proj-expand open" id="dd-sofipo">
@@ -1255,28 +1246,28 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <div class="mg-wrap">
             <div style="display:flex">
               <div style="width:176px;flex-shrink:0"></div>
-              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
+              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S0</div><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
             </div>
 
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Discovery</div><div class="mg-label-sub">Briefing + referencias</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:12%">0.5–1 sem</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:17%">S0 · Discovery</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Wireframe → HiFi Mobile First</div><div class="mg-label-sub">Mobile first · sin grises</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:20%;width:60%">Variantes rápidas</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:24%;width:50%">Variantes rápidas</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Tablet + Desktop</div><div class="mg-label-sub">En paralelo</div></div>
-              <div class="mg-cells"><div class="mgbar purple" style="left:40%;width:40%">Simultáneos, mismo sprint</div></div>
+              <div class="mg-cells"><div class="mgbar purple" style="left:42%;width:33%">Simultáneos, mismo sprint</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">VoBo</div><div class="mg-label-sub">Review · aprobación</div></div>
-              <div class="mg-cells"><div class="mgbar amber" style="left:33%;width:8%">Cliente Review</div><div class="mgbar amber" style="left:72%;width:10%">VoBo cliente</div></div>
+              <div class="mg-cells"><div class="mgbar amber" style="left:44%;width:7%">Cliente Review</div><div class="mgbar amber" style="left:77%;width:8%">VoBo cliente</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Iteraciones + Handoff</div><div class="mg-label-sub">Entrega final</div></div>
-              <div class="mg-cells"><div class="mgbar green" style="left:38%;width:62%">a partir del Sprint 3</div></div>
+              <div class="mg-cells"><div class="mgbar green" style="left:48%;width:52%">a partir del Sprint 3</div></div>
             </div>
           </div>
 
@@ -1284,7 +1275,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
         </div>
       </div>
 
-      <!-- TRF Pay LP: semanas 3-7 -->
+      <!-- TRF Pay LP: semanas S1-S5 -->
       <div class="proj-row-wrap">
         <div class="proj-row" onclick="toggleDD('dd-pay', this)">
           <div style="width:196px;padding:8px 0 8px 0;flex-shrink:0;display:flex;align-items:center">
@@ -1295,7 +1286,7 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
             </div>
           </div>
           <div style="flex:1;display:flex;align-items:center;height:52px;position:relative">
-            <div style="position:absolute;left:11%;width:28%;height:28px;background:var(--amber);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S3–S7</div>
+            <div style="position:absolute;left:8.3%;width:42%;height:28px;background:var(--amber);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S1–S5</div>
           </div>
         </div>
         <div class="proj-expand" id="dd-pay">
@@ -1305,28 +1296,28 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <div class="mg-wrap">
             <div style="display:flex">
               <div style="width:176px;flex-shrink:0"></div>
-              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
+              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S0</div><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
             </div>
 
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Discovery</div><div class="mg-label-sub">Briefing + referencias</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:12%">0.5–1 sem</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:17%">S0 · Discovery</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Wireframe → HiFi Mobile First</div><div class="mg-label-sub">Mobile first · sin grises</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:20%;width:60%">Variantes rápidas</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:24%;width:50%">Variantes rápidas</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Tablet + Desktop</div><div class="mg-label-sub">En paralelo</div></div>
-              <div class="mg-cells"><div class="mgbar purple" style="left:40%;width:40%">Simultáneos, mismo sprint</div></div>
+              <div class="mg-cells"><div class="mgbar purple" style="left:42%;width:33%">Simultáneos, mismo sprint</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">VoBo</div><div class="mg-label-sub">Review · aprobación</div></div>
-              <div class="mg-cells"><div class="mgbar amber" style="left:33%;width:8%">Cliente Review</div><div class="mgbar amber" style="left:72%;width:10%">VoBo cliente</div></div>
+              <div class="mg-cells"><div class="mgbar amber" style="left:44%;width:7%">Cliente Review</div><div class="mgbar amber" style="left:77%;width:8%">VoBo cliente</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Iteraciones + Handoff</div><div class="mg-label-sub">Entrega final</div></div>
-              <div class="mg-cells"><div class="mgbar green" style="left:38%;width:62%">a partir del Sprint 3</div></div>
+              <div class="mg-cells"><div class="mgbar green" style="left:48%;width:52%">a partir del Sprint 3</div></div>
             </div>
           </div>
 
@@ -1334,49 +1325,49 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
         </div>
       </div>
 
-      <!-- TRF Casa de Bolsa: semanas 6-12 -->
+      <!-- TRF Casa de Bolsa: semanas S2-S8 -->
       <div class="proj-row-wrap">
         <div class="proj-row" onclick="toggleDD('dd-casa', this)">
           <div style="width:196px;padding:8px 0 8px 0;flex-shrink:0;display:flex;align-items:center">
             <span class="proj-toggle-icon">▶</span>
             <div>
               <div style="font-size:var(--fs-sm);font-weight:600;color:var(--purple)">TRF Casa de Bolsa</div>
-              <div style="font-size:var(--fs-note);color:var(--subtle)">15 features · 7 sem</div>
+              <div style="font-size:var(--fs-note);color:var(--subtle)">15 features · 5 sem</div>
             </div>
           </div>
           <div style="flex:1;display:flex;align-items:center;height:52px;position:relative">
-            <div style="position:absolute;left:28%;width:39%;height:28px;background:var(--purple);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S6–S12 · Prioridad entrega</div>
+            <div style="position:absolute;left:16.7%;width:42%;height:28px;background:var(--purple);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S2–S6 · Prioridad entrega</div>
           </div>
         </div>
         <div class="proj-expand" id="dd-casa">
         <div style="margin-left:210px">
-          <div style="font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:12px">PROCESO INTERNO POR FEATURE · 7 SEMANAS · ESCALA RELATIVA</div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:12px">PROCESO INTERNO POR FEATURE · 5 SEMANAS · ESCALA RELATIVA</div>
           
           <div class="mg-wrap">
             <div style="display:flex">
               <div style="width:176px;flex-shrink:0"></div>
-              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div><div class="mg-hcol">S6</div><div class="mg-hcol">S7</div></div>
+              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S0</div><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
             </div>
 
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Discovery</div><div class="mg-label-sub">Briefing + referencias</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:12%">0.5–1 sem</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:17%">S0 · Discovery</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Wireframe → HiFi Mobile First</div><div class="mg-label-sub">Mobile first · sin grises</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:20%;width:60%">Variantes rápidas</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:24%;width:50%">Variantes rápidas</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Tablet + Desktop</div><div class="mg-label-sub">En paralelo</div></div>
-              <div class="mg-cells"><div class="mgbar purple" style="left:40%;width:40%">Simultáneos, mismo sprint</div></div>
+              <div class="mg-cells"><div class="mgbar purple" style="left:42%;width:33%">Simultáneos, mismo sprint</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">VoBo</div><div class="mg-label-sub">Review · aprobación</div></div>
-              <div class="mg-cells"><div class="mgbar amber" style="left:33%;width:8%">Cliente Review</div><div class="mgbar amber" style="left:72%;width:10%">VoBo cliente</div></div>
+              <div class="mg-cells"><div class="mgbar amber" style="left:44%;width:7%">Cliente Review</div><div class="mgbar amber" style="left:77%;width:8%">VoBo cliente</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Iteraciones + Handoff</div><div class="mg-label-sub">Entrega final</div></div>
-              <div class="mg-cells"><div class="mgbar green" style="left:38%;width:62%">a partir del Sprint 3</div></div>
+              <div class="mg-cells"><div class="mgbar green" style="left:48%;width:52%">a partir del Sprint 3</div></div>
             </div>
           </div>
 
@@ -1384,49 +1375,49 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
         </div>
       </div>
 
-      <!-- AM: semanas 8-14 -->
+      <!-- AM: semanas S3-S9 -->
       <div class="proj-row-wrap">
         <div class="proj-row" onclick="toggleDD('dd-am', this)">
           <div style="width:196px;padding:8px 0 8px 0;flex-shrink:0;display:flex;align-items:center">
             <span class="proj-toggle-icon">▶</span>
             <div>
               <div style="font-size:var(--fs-sm);font-weight:600;color:var(--green)">Asset Management</div>
-              <div style="font-size:var(--fs-note);color:var(--subtle)">8 features · 7 sem</div>
+              <div style="font-size:var(--fs-note);color:var(--subtle)">8 features · 5 sem</div>
             </div>
           </div>
           <div style="flex:1;display:flex;align-items:center;height:52px;position:relative">
-            <div style="position:absolute;left:39%;width:39%;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S8–S14</div>
+            <div style="position:absolute;left:25%;width:42%;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">S3–S7</div>
           </div>
         </div>
         <div class="proj-expand" id="dd-am">
         <div style="margin-left:210px">
-          <div style="font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:12px">PROCESO INTERNO POR FEATURE · 7 SEMANAS · ESCALA RELATIVA</div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:12px">PROCESO INTERNO POR FEATURE · 5 SEMANAS · ESCALA RELATIVA</div>
           
           <div class="mg-wrap">
             <div style="display:flex">
               <div style="width:176px;flex-shrink:0"></div>
-              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div><div class="mg-hcol">S6</div><div class="mg-hcol">S7</div></div>
+              <div style="flex:1;display:flex;border-bottom:1px solid var(--border2)"><div class="mg-hcol">S0</div><div class="mg-hcol">S1</div><div class="mg-hcol">S2</div><div class="mg-hcol">S3</div><div class="mg-hcol">S4</div><div class="mg-hcol">S5</div></div>
             </div>
 
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Discovery</div><div class="mg-label-sub">Briefing + referencias</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:12%">0.5–1 sem</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:0%;width:17%">S0 · Discovery</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Wireframe → HiFi Mobile First</div><div class="mg-label-sub">Mobile first · sin grises</div></div>
-              <div class="mg-cells"><div class="mgbar teal" style="left:20%;width:60%">Variantes rápidas</div></div>
+              <div class="mg-cells"><div class="mgbar teal" style="left:24%;width:50%">Variantes rápidas</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Tablet + Desktop</div><div class="mg-label-sub">En paralelo</div></div>
-              <div class="mg-cells"><div class="mgbar purple" style="left:40%;width:40%">Simultáneos, mismo sprint</div></div>
+              <div class="mg-cells"><div class="mgbar purple" style="left:42%;width:33%">Simultáneos, mismo sprint</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">VoBo</div><div class="mg-label-sub">Review · aprobación</div></div>
-              <div class="mg-cells"><div class="mgbar amber" style="left:33%;width:8%">Cliente Review</div><div class="mgbar amber" style="left:72%;width:10%">VoBo cliente</div></div>
+              <div class="mg-cells"><div class="mgbar amber" style="left:44%;width:7%">Cliente Review</div><div class="mgbar amber" style="left:77%;width:8%">VoBo cliente</div></div>
             </div>
             <div class="mg-row">
               <div class="mg-label" style="width:176px"><div class="mg-label-main">Iteraciones + Handoff</div><div class="mg-label-sub">Entrega final</div></div>
-              <div class="mg-cells"><div class="mgbar green" style="left:38%;width:62%">a partir del Sprint 3</div></div>
+              <div class="mg-cells"><div class="mgbar green" style="left:48%;width:52%">a partir del Sprint 3</div></div>
             </div>
           </div>
 
@@ -1438,10 +1429,10 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
       <div style="display:flex;align-items:center;min-height:48px">
         <div style="width:196px;padding:8px 12px 8px 0;flex-shrink:0">
           <div style="font-size:var(--fs-sm);font-weight:600;color:var(--accent)">Design System</div>
-          <div style="font-size:var(--fs-note);color:var(--subtle)">Progresivo · 4.5 meses</div>
+          <div style="font-size:var(--fs-note);color:var(--subtle)">Progresivo · 3 meses</div>
         </div>
         <div style="flex:1;display:flex;align-items:center;height:48px;position:relative">
-          <div style="position:absolute;left:11%;width:78%;height:28px;background:linear-gradient(90deg, var(--accent) 0%, rgba(224,32,32,0.4) 100%);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">Base → Extensión por producto → Sistema consolidado</div>
+          <div style="position:absolute;left:8.3%;width:91.7%;height:28px;background:linear-gradient(90deg, var(--accent) 0%, rgba(224,32,32,0.4) 100%);border-radius:6px;display:flex;align-items:center;padding:0 10px;font-size:var(--fs-note);font-weight:600;color:#fff">Base → Extensión por producto → Sistema consolidado</div>
         </div>
       </div>
     </div>
@@ -1532,34 +1523,32 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
   <div class="section-title">Fases de Ejecución</div>
   <div class="g3" style="gap:16px;margin-bottom:24px">
     <div class="c">
-      <div style="font-size:var(--fs-label);font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:8px">FASE 1 · Semanas 1–6</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Arranque y Primeras Entregas</div>
+      <div style="font-size:var(--fs-label);font-weight:700;color:var(--blue);letter-spacing:.1em;margin-bottom:8px">FASE 1 · S0–S3 · Mes 1</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Arranques en Paralelo</div>
       <ul style="font-size:var(--fs-sm);color:var(--muted);line-height:1.8;padding-left:16px">
-        <li>Kick-off TRF Sofipo (S1) + DS base</li>
+        <li>Kick-off TRF Sofipo (S0) + DS base</li>
         <li>Design System: tokens, tipografía, color, grids</li>
-        <li>Diseño completo TRF Sofipo (S1–S5)</li>
-        <li>Kick-off TRF Casa de Bolsa (S3)</li>
-        <li>Kick-off Asset Management (S5)</li>
-        <li>Kick-off Trafalgar Pay LP (S7)</li>
+        <li>Kick-off Trafalgar Pay LP (S1)</li>
+        <li>Kick-off TRF Casa de Bolsa (S2)</li>
+        <li>Kick-off Asset Management (S3)</li>
       </ul>
     </div>
     <div class="c">
-      <div style="font-size:var(--fs-label);font-weight:700;color:var(--purple);letter-spacing:.1em;margin-bottom:8px">FASE 2 · Semanas 7–12</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Cierre CdB y AM</div>
+      <div style="font-size:var(--fs-label);font-weight:700;color:var(--purple);letter-spacing:.1em;margin-bottom:8px">FASE 2 · S4–S7 · Mes 2</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px">Entregas de los 4 Productos</div>
       <ul style="font-size:var(--fs-sm);color:var(--muted);line-height:1.8;padding-left:16px">
-        <li>Revisiones TRF Sofipo + entrega</li>
-        <li>Diseño completo Trafalgar Pay LP (S7–S11)</li>
-        <li>Diseño completo AM (S5–S11)</li>
-        <li>CdB: avance de features (S3–S9)</li>
+        <li>Entrega TRF Sofipo (S4)</li>
+        <li>Entrega Trafalgar Pay LP (S5)</li>
+        <li>Entrega TRF Casa de Bolsa (S6)</li>
+        <li>Entrega Asset Management (S7)</li>
         <li>DS: extensiones por producto</li>
       </ul>
     </div>
     <div class="c">
-      <div style="font-size:var(--fs-label);font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:8px">FASE 3 · Semanas 12–18</div>
+      <div style="font-size:var(--fs-label);font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:8px">FASE 3 · S8–S11 · Mes 3</div>
       <div style="font-size:15px;font-weight:700;margin-bottom:8px">Consolidación y Cierre</div>
       <ul style="font-size:var(--fs-sm);color:var(--muted);line-height:1.8;padding-left:16px">
-        <li>Entrega final TRF Casa de Bolsa (S9)</li>
-        <li>Revisiones AM + Pay LP entregados</li>
+        <li>Revisiones finales y VoBo de los 4 productos</li>
         <li>Design System: consolidación final</li>
         <li>Prototipo funcional HTML/MD del DS</li>
         <li>Entrega de todos los Figma files + cierre</li>
@@ -1576,10 +1565,10 @@ details.deepdive[open] .deepdive-arrow { transform:rotate(90deg); }
           <tr>
             <th style="text-align:left">Perfil / Sueldo bruto</th>
             <th>TRF Sofipo<br><span style="font-weight:400;font-size:12px">5 sem</span></th>
-            <th>TRF CdB<br><span style="font-weight:400;font-size:12px">7 sem</span></th>
-            <th>Asset Mgmt<br><span style="font-weight:400;font-size:12px">7 sem</span></th>
+            <th>TRF CdB<br><span style="font-weight:400;font-size:12px">5 sem</span></th>
+            <th>Asset Mgmt<br><span style="font-weight:400;font-size:12px">5 sem</span></th>
             <th>TRF Pay<br><span style="font-weight:400;font-size:12px">5 sem</span></th>
-            <th>Design Sys<br><span style="font-weight:400;font-size:12px">4.5 meses</span></th>
+            <th>Design Sys<br><span style="font-weight:400;font-size:12px">3 meses</span></th>
             <th>Costo Total</th>
           </tr>
         </thead>
@@ -1755,10 +1744,10 @@ function toggleDD(id, rowEl) {
 }
 
 function toggleVista() {
-  // isInternal = !isInternal;
+  isInternal = !isInternal;
   const track = document.getElementById('vistaTrack');
   track.classList.toggle('on', isInternal);
-  // disabled, isInternal);
+  document.body.classList.toggle('internal', isInternal);
 }
 
 // ═══════════════════════════════════════
@@ -1768,6 +1757,13 @@ window.addEventListener('load', () => {
   updateIndicator();
 });
 window.addEventListener('resize', updateIndicator);
+
+  // Versión cliente: funcionalidad de toggle desactivada
+  function toggleVista() {}
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.remove('internal');
+  });
+
 </script>
 
 </body>
